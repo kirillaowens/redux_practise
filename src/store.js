@@ -25,10 +25,13 @@ const reducer = (state = initialState, action) => {
 
     case "TOGGLE":
       return state.map((todo) =>
-        todo.id === action.todoId
+        todo.id === action.id
           ? { ...todo, isCompleted: !todo.isCompleted }
           : todo
       );
+
+    case "DELETE":
+      return state.filter((todo) => todo.id !== action.id);
 
     case "RESET":
       return [];
@@ -37,6 +40,25 @@ const reducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const addTodo = (title) => ({
+  type: "ADD",
+  title,
+});
+
+export const deleteTodo = (id) => ({
+  type: "DELETE",
+  id,
+});
+
+export const toggleTodo = (id) => ({
+  type: "TOGGLE",
+  id,
+});
+
+export const resetList = () => ({
+  type: "RESET",
+});
 
 const store = createStore(reducer);
 export default store;
