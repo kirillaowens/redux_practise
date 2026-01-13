@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 function App() {
@@ -17,6 +17,10 @@ function App() {
     setTitle("");
   };
 
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -27,7 +31,7 @@ function App() {
           onChange={(e) => setTitle(e.target.value)}
         />
         {todos.map((todo) => (
-          <div className="todo" key={todo.id} style={{display: "flex"}}>
+          <div className="todo" key={todo.id} style={{ display: "flex" }}>
             <p className="title">{todo.title}</p>
             <input
               type="checkbox"
