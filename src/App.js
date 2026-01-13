@@ -8,8 +8,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>{count}</p>
-
+        <button onClick={() => dispatch({ type: "DECREMENT" })}>-</button>
         <button onClick={() => dispatch({ type: "INCREMENT" })}>+</button>
+        <button onClick={() => dispatch({ type: "RESET" })}>RESET</button>
       </header>
     </div>
   );
