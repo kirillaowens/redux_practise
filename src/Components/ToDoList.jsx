@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleTodo, deleteTodo } from "../store/actions/todos-actions";
 import { selectFilteredTodos } from "../store/selectors/todos-selectors";
 import { selectActiveFilter } from "../store/selectors/filters-selectors";
-
+import ProgressBar from "./ProgressBar";
 
 function ToDoList() {
   const filter = useSelector(selectActiveFilter);
@@ -27,6 +27,7 @@ function ToDoList() {
           <button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
         </div>
       ))}
+      {filter === "all" && <ProgressBar />}
     </div>
   );
 }
