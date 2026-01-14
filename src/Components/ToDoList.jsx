@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTodo, deleteTodo } from "../store/actions/todos-actions";
+import { selectFilteredTodos } from "../store/selectors/todos-selectors";
+import { selectActiveFilter } from "../store/selectors/filters-selectors";
+
 
 function ToDoList() {
-  const todos = useSelector((state) => state.todos);
+  const filter = useSelector(selectActiveFilter);
+  const todos = useSelector((state) => selectFilteredTodos(state, filter));
   const dispatch = useDispatch();
 
   useEffect(() => {
