@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo, resetList } from "../store";
+import { addTodo, resetList } from "../store/actions/todos-actions";
 
 function ToDo() {
   const dispatch = useDispatch();

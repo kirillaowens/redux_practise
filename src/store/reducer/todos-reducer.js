@@ -1,4 +1,4 @@
-import { legacy_createStore as createStore } from "redux";
+import { ADD, DELETE, RESET, TOGGLE } from "../consts/todos-consts";
 
 const loadTodos = () => {
   const data = localStorage.getItem("todos");
@@ -11,9 +11,9 @@ let nextToDoId = initialState.length
   ? Math.max(...initialState.map((todo) => todo.id))
   : 0;
 
-const reducer = (state = initialState, action) => {
+export const todos = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD":
+    case ADD:
       return [
         ...state,
         {
@@ -23,42 +23,20 @@ const reducer = (state = initialState, action) => {
         },
       ];
 
-    case "TOGGLE":
+    case TOGGLE:
       return state.map((todo) =>
         todo.id === action.id
           ? { ...todo, isCompleted: !todo.isCompleted }
           : todo
       );
 
-    case "DELETE":
+    case DELETE:
       return state.filter((todo) => todo.id !== action.id);
 
-    case "RESET":
+    case RESET:
       return [];
 
     default:
       return state;
   }
 };
-
-export const addTodo = (title) => ({
-  type: "ADD",
-  title,
-});
-
-export const deleteTodo = (id) => ({
-  type: "DELETE",
-  id,
-});
-
-export const toggleTodo = (id) => ({
-  type: "TOGGLE",
-  id,
-});
-
-export const resetList = () => ({
-  type: "RESET",
-});
-
-const store = createStore(reducer);
-export default store;
